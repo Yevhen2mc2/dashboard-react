@@ -1,3 +1,40 @@
-# Ignore artifacts:
-build
-coverage
+# Dependencies
+node_modules/
+
+# Build files
+dist/
+build/
+
+# Configuration files (JSON)
+package.json
+package-lock.json
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+eslint.config.js
+vite.config.ts
+components.json
+
+# HTML
+*.html
+public/
+
+# CSS
+*.css
+
+# Environment files
+.env
+.env.local
+
+# Git
+.gitignore
+
+# Editor
+.editorconfig
+.vscode/
+.idea/
+
+# Documentation and other
+README.md
+*.md
+LICENSE

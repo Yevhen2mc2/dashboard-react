@@ -1,6 +1,11 @@
 // Type definitions for all dashboard data blocks
 
-export type LoanType = 'Personal' | 'Auto' | 'Mortgage' | 'Business' | 'Student';
+export type LoanType =
+  | 'Personal'
+  | 'Auto'
+  | 'Mortgage'
+  | 'Business'
+  | 'Student';
 export type AgeGroup = '18-25' | '26-35' | '36-45' | '46-60' | '60+';
 export type ApplicationStatus = 'Pending' | 'Approved' | 'Rejected';
 export type PaymentStatus = 'Current' | 'Late' | 'Default' | 'Restructured';
@@ -88,4 +93,3 @@ export interface DashboardData {
   portfolioYield: PortfolioYieldData[];
   highRiskClients: HighRiskClient[];
 }
-

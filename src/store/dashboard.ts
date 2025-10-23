@@ -8,7 +8,7 @@ type Country = 'all' | 'usa' | 'uk' | 'germany' | 'canada' | 'france';
 interface DashboardStore {
   panelMode: PanelMode;
   setPanelMode: (mode: PanelMode) => void;
-  
+
   // Global Filters
   timeRange: TimeRange;
   country: Country;
@@ -23,7 +23,7 @@ export const useDashboardStore = create<DashboardStore>()(
       // Panel Mode
       panelMode: 'classic',
       setPanelMode: (mode: PanelMode) => set({ panelMode: mode }),
-      
+
       // Global Filters
       timeRange: '24h',
       country: 'all',

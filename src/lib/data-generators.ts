@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 import type {
   OverviewData,
   IssuanceDataPoint,
@@ -13,10 +13,10 @@ import type {
   AgeGroup,
   ApplicationStatus,
   PaymentStatus,
-} from "@/types/dashboard-data";
+} from '@/types/dashboard-data';
 
-type Country = "all" | "usa" | "uk" | "germany" | "canada" | "france";
-type TimeRange = "24h" | "7d" | "30d" | "all";
+type Country = 'all' | 'usa' | 'uk' | 'germany' | 'canada' | 'france';
+type TimeRange = '24h' | '7d' | '30d' | 'all';
 
 // Country-specific scaling factors
 const COUNTRY_SCALE: Record<Country, number> = {
@@ -31,84 +31,84 @@ const COUNTRY_SCALE: Record<Country, number> = {
 // Regions by country
 const REGIONS: Record<Country, string[]> = {
   usa: [
-    "California",
-    "Texas",
-    "Florida",
-    "New York",
-    "Illinois",
-    "Pennsylvania",
-    "Ohio",
-    "Georgia",
+    'California',
+    'Texas',
+    'Florida',
+    'New York',
+    'Illinois',
+    'Pennsylvania',
+    'Ohio',
+    'Georgia',
   ],
   uk: [
-    "London",
-    "Manchester",
-    "Birmingham",
-    "Glasgow",
-    "Liverpool",
-    "Leeds",
-    "Sheffield",
-    "Bristol",
+    'London',
+    'Manchester',
+    'Birmingham',
+    'Glasgow',
+    'Liverpool',
+    'Leeds',
+    'Sheffield',
+    'Bristol',
   ],
   germany: [
-    "Berlin",
-    "Munich",
-    "Hamburg",
-    "Cologne",
-    "Frankfurt",
-    "Stuttgart",
-    "Düsseldorf",
-    "Dortmund",
+    'Berlin',
+    'Munich',
+    'Hamburg',
+    'Cologne',
+    'Frankfurt',
+    'Stuttgart',
+    'Düsseldorf',
+    'Dortmund',
   ],
   canada: [
-    "Ontario",
-    "Quebec",
-    "British Columbia",
-    "Alberta",
-    "Manitoba",
-    "Saskatchewan",
-    "Nova Scotia",
-    "New Brunswick",
+    'Ontario',
+    'Quebec',
+    'British Columbia',
+    'Alberta',
+    'Manitoba',
+    'Saskatchewan',
+    'Nova Scotia',
+    'New Brunswick',
   ],
   france: [
-    "Paris",
-    "Marseille",
-    "Lyon",
-    "Toulouse",
-    "Nice",
-    "Nantes",
-    "Strasbourg",
-    "Bordeaux",
+    'Paris',
+    'Marseille',
+    'Lyon',
+    'Toulouse',
+    'Nice',
+    'Nantes',
+    'Strasbourg',
+    'Bordeaux',
   ],
   all: [
-    "North America",
-    "Europe",
-    "Asia Pacific",
-    "Latin America",
-    "Middle East",
-    "Africa",
+    'North America',
+    'Europe',
+    'Asia Pacific',
+    'Latin America',
+    'Middle East',
+    'Africa',
   ],
 };
 
 const LOAN_TYPES: LoanType[] = [
-  "Personal",
-  "Auto",
-  "Mortgage",
-  "Business",
-  "Student",
+  'Personal',
+  'Auto',
+  'Mortgage',
+  'Business',
+  'Student',
 ];
-const AGE_GROUPS: AgeGroup[] = ["18-25", "26-35", "36-45", "46-60", "60+"];
+const AGE_GROUPS: AgeGroup[] = ['18-25', '26-35', '36-45', '46-60', '60+'];
 
 // Helper: Get number of data points based on time range
 function getDataPointCount(timeRange: TimeRange): number {
   switch (timeRange) {
-    case "24h":
+    case '24h':
       return 24; // hourly
-    case "7d":
+    case '7d':
       return 7; // daily
-    case "30d":
+    case '30d':
       return 30; // daily
-    case "all":
+    case 'all':
       return 12; // monthly
     default:
       return 24;
@@ -119,29 +119,29 @@ function getDataPointCount(timeRange: TimeRange): number {
 function getTimeLabel(index: number, timeRange: TimeRange): string {
   const now = new Date();
   switch (timeRange) {
-    case "24h":
+    case '24h':
       now.setHours(now.getHours() - (23 - index));
-      return now.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
+      return now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
       });
-    case "7d":
+    case '7d':
       now.setDate(now.getDate() - (6 - index));
-      return now.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
+      return now.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
       });
-    case "30d":
+    case '30d':
       now.setDate(now.getDate() - (29 - index));
-      return now.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
+      return now.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
       });
-    case "all":
+    case 'all':
       now.setMonth(now.getMonth() - (11 - index));
-      return now.toLocaleDateString("en-US", {
-        month: "short",
-        year: "2-digit",
+      return now.toLocaleDateString('en-US', {
+        month: 'short',
+        year: '2-digit',
       });
     default:
       return now.toISOString();
@@ -151,7 +151,7 @@ function getTimeLabel(index: number, timeRange: TimeRange): string {
 // Helper: Generate synthetic trend data (12 points)
 function generateTrend(
   currentValue: number,
-  variancePercent: number,
+  variancePercent: number
 ): number[] {
   const trend: number[] = [];
   let value = currentValue;
@@ -174,10 +174,10 @@ export function generateOverviewData(country: Country): OverviewData {
   const scale = COUNTRY_SCALE[country];
 
   const totalActiveLoans = Math.floor(
-    faker.number.int({ min: 5000, max: 15000 }) * scale,
+    faker.number.int({ min: 5000, max: 15000 }) * scale
   );
   const totalLoanAmount = Math.floor(
-    faker.number.int({ min: 50000000, max: 150000000 }) * scale,
+    faker.number.int({ min: 50000000, max: 150000000 }) * scale
   );
   const averageInterestRate = faker.number.float({
     min: 3.5,
@@ -205,7 +205,7 @@ export function generateOverviewData(country: Country): OverviewData {
 // Block 2: Generate Loan Issuance Data
 export function generateIssuanceData(
   country: Country,
-  timeRange: TimeRange,
+  timeRange: TimeRange
 ): IssuanceDataPoint[] {
   const scale = COUNTRY_SCALE[country];
   const count = getDataPointCount(timeRange);
@@ -214,7 +214,7 @@ export function generateIssuanceData(
     timestamp: getTimeLabel(i, timeRange),
     newLoans: Math.floor(faker.number.int({ min: 50, max: 200 }) * scale),
     loanAmount: Math.floor(
-      faker.number.int({ min: 500000, max: 2000000 }) * scale,
+      faker.number.int({ min: 500000, max: 2000000 }) * scale
     ),
   }));
 }
@@ -240,14 +240,14 @@ export function generateLoanTypeData(country: Country): LoanTypeData[] {
 
 // Block 4: Generate Age Distribution Data
 export function generateAgeDistribution(
-  country: Country,
+  country: Country
 ): AgeDistributionData[] {
   const scale = COUNTRY_SCALE[country];
 
   return AGE_GROUPS.map((ageGroup) => ({
     ageGroup,
     borrowersCount: Math.floor(
-      faker.number.int({ min: 800, max: 2500 }) * scale,
+      faker.number.int({ min: 800, max: 2500 }) * scale
     ),
   }));
 }
@@ -260,7 +260,7 @@ export function generateRegionData(country: Country): RegionData[] {
   return regions.map((region) => ({
     region,
     loanAmount: Math.floor(
-      faker.number.int({ min: 2000000, max: 15000000 }) * scale,
+      faker.number.int({ min: 2000000, max: 15000000 }) * scale
     ),
   }));
 }
@@ -273,7 +273,7 @@ export function generateInterestRateData(country: Country): InterestRateData[] {
     loanType,
     averageRate: faker.number.float({ min: 3.0, max: 8.0, fractionDigits: 2 }),
     issuedAmount: Math.floor(
-      faker.number.int({ min: 3000000, max: 20000000 }) * scale,
+      faker.number.int({ min: 3000000, max: 20000000 }) * scale
     ),
   }));
 }
@@ -283,21 +283,21 @@ export function generateLiveApplications(country: Country): LiveApplication[] {
   const scale = COUNTRY_SCALE[country];
   const count = 50;
 
-  const statuses: ApplicationStatus[] = ["Pending", "Approved", "Rejected"];
+  const statuses: ApplicationStatus[] = ['Pending', 'Approved', 'Rejected'];
 
   return Array.from({ length: count }, (_, i) => {
     const timestamp = new Date(Date.now() - (count - i) * 3000); // 3 seconds apart
 
     return {
       applicationId: faker.string.alphanumeric(8).toUpperCase(),
-      timestamp: timestamp.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+      timestamp: timestamp.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
       }),
       loanType: faker.helpers.arrayElement(LOAN_TYPES),
       requestedAmount: Math.floor(
-        faker.number.int({ min: 5000, max: 500000 }) * scale,
+        faker.number.int({ min: 5000, max: 500000 }) * scale
       ),
       status: faker.helpers.arrayElement(statuses),
     };
@@ -307,18 +307,18 @@ export function generateLiveApplications(country: Country): LiveApplication[] {
 // Block 8: Generate Portfolio Yield Data
 export function generatePortfolioYield(
   _country: Country,
-  timeRange: TimeRange,
+  timeRange: TimeRange
 ): PortfolioYieldData[] {
-  const count = timeRange === "all" ? 12 : timeRange === "30d" ? 6 : 3;
+  const count = timeRange === 'all' ? 12 : timeRange === '30d' ? 6 : 3;
 
   return Array.from({ length: count }, (_, i) => {
     const date = new Date();
     date.setMonth(date.getMonth() - (count - 1 - i));
 
     return {
-      month: date.toLocaleDateString("en-US", {
-        month: "short",
-        year: "2-digit",
+      month: date.toLocaleDateString('en-US', {
+        month: 'short',
+        year: '2-digit',
       }),
       yieldPercentage: faker.number.float({
         min: 4.5,
@@ -335,10 +335,10 @@ export function generateHighRiskClients(country: Country): HighRiskClient[] {
   const count = faker.number.int({ min: 10, max: 20 });
 
   const paymentStatuses: PaymentStatus[] = [
-    "Current",
-    "Late",
-    "Default",
-    "Restructured",
+    'Current',
+    'Late',
+    'Default',
+    'Restructured',
   ];
 
   return Array.from({ length: count }, () => ({

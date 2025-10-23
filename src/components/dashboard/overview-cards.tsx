@@ -1,6 +1,6 @@
-import { useLoanDashboardData } from "@/hooks";
-import { OverviewCard } from "./overview-card";
-import { FileText, DollarSign, Percent, AlertTriangle } from "lucide-react";
+import { useLoanDashboardData } from '@/hooks';
+import { OverviewCard } from './overview-card';
+import { FileText, DollarSign, Percent, AlertTriangle } from 'lucide-react';
 
 export function OverviewCards() {
   const { overviewData } = useLoanDashboardData();
@@ -14,11 +14,11 @@ export function OverviewCards() {
 
   // Format functions
   const formatNumber = (value: number | string): string => {
-    return typeof value === "number" ? value.toLocaleString("en-US") : value;
+    return typeof value === 'number' ? value.toLocaleString('en-US') : value;
   };
 
   const formatCurrency = (value: number | string): string => {
-    const num = typeof value === "string" ? parseFloat(value) : value;
+    const num = typeof value === 'string' ? parseFloat(value) : value;
     return `$${(num / 1000000).toFixed(1)}M`;
   };
 

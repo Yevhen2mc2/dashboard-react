@@ -1,26 +1,26 @@
-import { useDashboardStore } from "@/store/dashboard";
+import { useDashboardStore } from '@/store/dashboard';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 const TIME_RANGE_OPTIONS = [
-  { label: "Last 24 Hours", value: "24h" as const },
-  { label: "Last 7 Days", value: "7d" as const },
-  { label: "Last 30 Days", value: "30d" as const },
-  { label: "All Time", value: "all" as const },
+  { label: 'Last 24 Hours', value: '24h' as const },
+  { label: 'Last 7 Days', value: '7d' as const },
+  { label: 'Last 30 Days', value: '30d' as const },
+  { label: 'All Time', value: 'all' as const },
 ];
 
 const COUNTRY_OPTIONS = [
-  { label: "All Countries", value: "all" as const },
-  { label: "USA", value: "usa" as const },
-  { label: "United Kingdom", value: "uk" as const },
-  { label: "Germany", value: "germany" as const },
-  { label: "Canada", value: "canada" as const },
-  { label: "France", value: "france" as const },
+  { label: 'All Countries', value: 'all' as const },
+  { label: 'USA', value: 'usa' as const },
+  { label: 'United Kingdom', value: 'uk' as const },
+  { label: 'Germany', value: 'germany' as const },
+  { label: 'Canada', value: 'canada' as const },
+  { label: 'France', value: 'france' as const },
 ];
 
 export function ControlPanel() {

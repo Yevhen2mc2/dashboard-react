@@ -1,12 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import type { LucideIcon } from "lucide-react";
-import { ArrowDown, ArrowUp } from "lucide-react";
-import { Line, LineChart } from "recharts";
+} from '@/components/ui/chart';
+import type { LucideIcon } from 'lucide-react';
+import { ArrowDown, ArrowUp } from 'lucide-react';
+import { Line, LineChart } from 'recharts';
 
 interface OverviewCardProps {
   title: string;
@@ -32,8 +32,8 @@ export function OverviewCard({
   const isPositive = isNegativeGood ? changePercent < 0 : changePercent > 0;
 
   const changeColor = isPositive
-    ? "text-green-600 dark:text-green-500"
-    : "text-red-600 dark:text-red-500";
+    ? 'text-green-600 dark:text-green-500'
+    : 'text-red-600 dark:text-red-500';
 
   const ChangeIcon = isPositive ? ArrowUp : ArrowDown;
 
@@ -70,7 +70,7 @@ export function OverviewCard({
               config={{
                 value: {
                   label: title,
-                  color: "hsl(var(--primary))",
+                  color: 'hsl(var(--primary))',
                 },
               }}
               className="h-14 w-full"
@@ -97,8 +97,8 @@ export function OverviewCard({
                   dot={false}
                   activeDot={{
                     r: 4,
-                    fill: "hsl(var(--primary))",
-                    stroke: "hsl(var(--background))",
+                    fill: 'hsl(var(--primary))',
+                    stroke: 'hsl(var(--background))',
                     strokeWidth: 2,
                   }}
                 />

@@ -1,7 +1,7 @@
-import { ThemeProvider } from "@/components/layout/theme-provider.tsx";
-import { Header } from "@/components/layout/header.tsx";
-import { ControlPanel } from "@/components/layout/control-panel.tsx";
-import { OverviewCards } from "@/components/dashboard/overview-cards.tsx";
+import { ThemeProvider } from '@/components/layout/theme-provider.tsx';
+import { Header } from '@/components/layout/header.tsx';
+import { ControlPanel } from '@/components/layout/control-panel.tsx';
+import { OverviewCards } from '@/components/dashboard/overview-cards.tsx';
 
 function App() {
   return (
