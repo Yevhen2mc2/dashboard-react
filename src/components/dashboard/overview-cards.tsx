@@ -23,7 +23,8 @@ export function OverviewCards() {
   };
 
   const formatPercent = (value: number | string): string => {
-    return `${value}%`;
+    const n = Number(value).toFixed(2);
+    return `${n}%`;
   };
 
   return (
