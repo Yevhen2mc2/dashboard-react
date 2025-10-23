@@ -1,10 +1,12 @@
-import { useLoanDashboardData } from '@/hooks';
 import { OverviewCard } from './overview-card';
 import { FileText, DollarSign, Percent, AlertTriangle } from 'lucide-react';
+import type { OverviewData } from '@/types/dashboard-data';
 
-export function OverviewCards() {
-  const { overviewData } = useLoanDashboardData();
+interface OverviewCardsProps {
+  overviewData: OverviewData;
+}
 
+export function OverviewCards({ overviewData }: OverviewCardsProps) {
   const calculateChange = (history: number[]): number => {
     if (history.length < 2) return 0;
     const current = history[history.length - 1];

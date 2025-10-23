@@ -83,15 +83,18 @@ export function updateOverviewData(current: OverviewData): OverviewData {
 // Block 2: Update Issuance Data (add new point, remove oldest)
 export function updateIssuanceData(
   current: IssuanceDataPoint[],
-  country: Country,
+  _country: Country,
   timeRange: TimeRange
 ): IssuanceDataPoint[] {
-  const scale = COUNTRY_SCALE[country];
-  const now = new Date();
+  if (current.length === 0) return current;
 
   let timestamp: string;
+
+  // Get current time for timestamp
+  const now = new Date();
   switch (timeRange) {
     case '24h':
+      // For hourly data, increment by 1 hour
       timestamp = now.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -99,12 +102,15 @@ export function updateIssuanceData(
       break;
     case '7d':
     case '30d':
+      // For daily data, keep incrementing days
+      // Since we're simulating, just use current time
       timestamp = now.toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
       });
       break;
     case 'all':
+      // For monthly data
       timestamp = now.toLocaleDateString('en-US', {
         month: 'short',
         year: '2-digit',
@@ -114,11 +120,14 @@ export function updateIssuanceData(
       timestamp = now.toISOString();
   }
 
+  // Generate new values with some variance from the last point
+  const lastPoint = current[current.length - 1];
   const newPoint: IssuanceDataPoint = {
     timestamp,
-    newLoans: Math.floor(faker.number.int({ min: 50, max: 200 }) * scale),
-    loanAmount: Math.floor(
-      faker.number.int({ min: 500000, max: 2000000 }) * scale
+    newLoans: Math.max(10, Math.floor(applyVariance(lastPoint.newLoans, 10))),
+    loanAmount: Math.max(
+      100000,
+      Math.floor(applyVariance(lastPoint.loanAmount, 10))
     ),
   };
 
