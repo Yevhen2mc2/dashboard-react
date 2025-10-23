@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/layout/theme-provider.tsx";
 import { Header } from "@/components/layout/header.tsx";
 import { ControlPanel } from "@/components/layout/control-panel.tsx";
+import { OverviewCards } from "@/components/dashboard/overview-cards.tsx";
 
 function App() {
   return (
@@ -8,8 +9,8 @@ function App() {
       <div className="min-h-screen bg-background">
         <Header />
         <ControlPanel />
-        <main className="flex-1">
-          {/* Control Panel and Dashboard Content will go here */}
+        <main className="flex-1 container mx-auto px-4 py-6">
+          <OverviewCards />
         </main>
       </div>
     </ThemeProvider>
