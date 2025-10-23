@@ -29,11 +29,12 @@ export function OverviewCard({
 }: OverviewCardProps) {
   const formattedValue = formatValue ? formatValue(value) : value;
 
-  // Determine if change is positive (green) or negative (red)
   const isPositive = isNegativeGood ? changePercent < 0 : changePercent > 0;
+
   const changeColor = isPositive
     ? "text-green-600 dark:text-green-500"
     : "text-red-600 dark:text-red-500";
+
   const ChangeIcon = isPositive ? ArrowUp : ArrowDown;
 
   // Prepare chart data
@@ -44,7 +45,7 @@ export function OverviewCard({
   }));
 
   return (
-    <Card className="">
+    <Card>
       <CardContent className="px-4">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">

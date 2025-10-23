@@ -1,55 +1,10 @@
-import { useState, useEffect } from "react";
 import { useLoanDashboardData } from "@/hooks";
 import { OverviewCard } from "./overview-card";
 import { FileText, DollarSign, Percent, AlertTriangle } from "lucide-react";
 
-interface TrendHistory {
-  totalActiveLoans: number[];
-  totalLoanAmount: number[];
-  averageInterestRate: number[];
-  defaultRate: number[];
-}
-
-const MAX_TREND_POINTS = 12;
-
 export function OverviewCards() {
   const { overviewData } = useLoanDashboardData();
 
-  // Track trend history for sparklines
-  const [trendHistory, setTrendHistory] = useState<TrendHistory>({
-    totalActiveLoans: [],
-    totalLoanAmount: [],
-    averageInterestRate: [],
-    defaultRate: [],
-  });
-
-  // Update trend history when data changes
-  useEffect(() => {
-    setTrendHistory((prev) => {
-      const addPoint = (arr: number[], newValue: number) => {
-        const updated = [...arr, newValue];
-        return updated.slice(-MAX_TREND_POINTS);
-      };
-
-      return {
-        totalActiveLoans: addPoint(
-          prev.totalActiveLoans,
-          overviewData.totalActiveLoans,
-        ),
-        totalLoanAmount: addPoint(
-          prev.totalLoanAmount,
-          overviewData.totalLoanAmount,
-        ),
-        averageInterestRate: addPoint(
-          prev.averageInterestRate,
-          overviewData.averageInterestRate,
-        ),
-        defaultRate: addPoint(prev.defaultRate, overviewData.defaultRate),
-      };
-    });
-  }, [overviewData]);
-
-  // Calculate percentage changes
   const calculateChange = (history: number[]): number => {
     if (history.length < 2) return 0;
     const current = history[history.length - 1];
@@ -77,8 +32,8 @@ export function OverviewCards() {
         title="Total Active Loans"
         value={overviewData.totalActiveLoans}
         icon={FileText}
-        trendData={trendHistory.totalActiveLoans}
-        changePercent={calculateChange(trendHistory.totalActiveLoans)}
+        trendData={overviewData.totalActiveLoansTrend}
+        changePercent={calculateChange(overviewData.totalActiveLoansTrend)}
         formatValue={formatNumber}
       />
 
@@ -86,8 +41,8 @@ export function OverviewCards() {
         title="Total Loan Amount"
         value={overviewData.totalLoanAmount}
         icon={DollarSign}
-        trendData={trendHistory.totalLoanAmount}
-        changePercent={calculateChange(trendHistory.totalLoanAmount)}
+        trendData={overviewData.totalLoanAmountTrend}
+        changePercent={calculateChange(overviewData.totalLoanAmountTrend)}
         formatValue={formatCurrency}
       />
 
@@ -95,8 +50,8 @@ export function OverviewCards() {
         title="Average Interest Rate"
         value={overviewData.averageInterestRate}
         icon={Percent}
-        trendData={trendHistory.averageInterestRate}
-        changePercent={calculateChange(trendHistory.averageInterestRate)}
+        trendData={overviewData.averageInterestRateTrend}
+        changePercent={calculateChange(overviewData.averageInterestRateTrend)}
         formatValue={formatPercent}
       />
 
@@ -104,8 +59,8 @@ export function OverviewCards() {
         title="Default Rate"
         value={overviewData.defaultRate}
         icon={AlertTriangle}
-        trendData={trendHistory.defaultRate}
-        changePercent={calculateChange(trendHistory.defaultRate)}
+        trendData={overviewData.defaultRateTrend}
+        changePercent={calculateChange(overviewData.defaultRateTrend)}
         formatValue={formatPercent}
         isNegativeGood={true}
       />

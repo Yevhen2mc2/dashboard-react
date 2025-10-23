@@ -11,6 +11,11 @@ export interface OverviewData {
   totalLoanAmount: number;
   averageInterestRate: number;
   defaultRate: number;
+  // Trend history for sparklines (max 12 points)
+  totalActiveLoansTrend: number[];
+  totalLoanAmountTrend: number[];
+  averageInterestRateTrend: number[];
+  defaultRateTrend: number[];
 }
 
 // Block 2: Loan Issuance Over Time (LineChart)

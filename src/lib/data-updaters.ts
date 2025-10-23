@@ -34,13 +34,28 @@ function applyVariance(value: number, variancePercent: number): number {
   return value * (1 + variance / 100);
 }
 
+// Helper: Add new value to trend array and keep max 12 points
+function addToTrend(trend: number[], newValue: number): number[] {
+  const updated = [...trend, newValue];
+  return updated.slice(-12);
+}
+
 // Block 1: Update Overview Data (±1-2% variance)
 export function updateOverviewData(current: OverviewData): OverviewData {
+  const totalActiveLoans = Math.floor(applyVariance(current.totalActiveLoans, 2));
+  const totalLoanAmount = Math.floor(applyVariance(current.totalLoanAmount, 2));
+  const averageInterestRate = parseFloat(applyVariance(current.averageInterestRate, 1).toFixed(2));
+  const defaultRate = parseFloat(applyVariance(current.defaultRate, 1.5).toFixed(2));
+  
   return {
-    totalActiveLoans: Math.floor(applyVariance(current.totalActiveLoans, 2)),
-    totalLoanAmount: Math.floor(applyVariance(current.totalLoanAmount, 2)),
-    averageInterestRate: parseFloat(applyVariance(current.averageInterestRate, 1).toFixed(2)),
-    defaultRate: parseFloat(applyVariance(current.defaultRate, 1.5).toFixed(2)),
+    totalActiveLoans,
+    totalLoanAmount,
+    averageInterestRate,
+    defaultRate,
+    totalActiveLoansTrend: addToTrend(current.totalActiveLoansTrend, totalActiveLoans),
+    totalLoanAmountTrend: addToTrend(current.totalLoanAmountTrend, totalLoanAmount),
+    averageInterestRateTrend: addToTrend(current.averageInterestRateTrend, averageInterestRate),
+    defaultRateTrend: addToTrend(current.defaultRateTrend, defaultRate),
   };
 }
 
