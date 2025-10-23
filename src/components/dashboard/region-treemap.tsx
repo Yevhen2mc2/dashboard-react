@@ -100,14 +100,13 @@ export function RegionTreemap({ regionData }: RegionTreemapProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[350px] w-full">
+        <ChartContainer config={chartConfig} className="h-[400px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <Treemap
               data={chartData}
               dataKey="size"
               isAnimationActive={false}
               aspectRatio={4 / 3}
-              stroke="var(--background)"
               fill="var(--chart-1)"
               content={<CustomizedContent />}
             />

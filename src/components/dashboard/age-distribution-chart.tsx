@@ -38,7 +38,7 @@ export function AgeDistributionChart({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+        <ChartContainer config={chartConfig} className="h-[400px] w-full">
           <BarChart data={ageDistribution}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis

@@ -9,6 +9,7 @@ import {
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { TrendingUp } from 'lucide-react';
 import type { IssuanceDataPoint } from '@/types/dashboard-data';
+import { useEffect, useState } from 'react';
 
 const chartConfig = {
   newLoans: {
@@ -26,7 +27,16 @@ interface LoanIssuanceChartProps {
 }
 
 export function LoanIssuanceChart({ issuanceData }: LoanIssuanceChartProps) {
-  // Format large numbers (1M, 2M, etc.)
+  const [animationDuration, setAnimationDuration] = useState(1000);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimationDuration(0);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const formatYAxis = (value: number) => {
     if (value >= 1000000) {
       return `$${(value / 1000000).toFixed(1)}M`;
@@ -46,7 +56,7 @@ export function LoanIssuanceChart({ issuanceData }: LoanIssuanceChartProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[350px] w-full">
+        <ChartContainer config={chartConfig} className="h-[400px] w-full">
           <LineChart data={issuanceData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
@@ -93,6 +103,7 @@ export function LoanIssuanceChart({ issuanceData }: LoanIssuanceChartProps) {
               dataKey="newLoans"
               stroke="var(--chart-1)"
               strokeWidth={2}
+              animationDuration={animationDuration}
               dot={false}
             />
             <Line
@@ -101,6 +112,7 @@ export function LoanIssuanceChart({ issuanceData }: LoanIssuanceChartProps) {
               dataKey="loanAmount"
               stroke="var(--chart-2)"
               strokeWidth={2}
+              animationDuration={animationDuration}
               dot={false}
             />
           </LineChart>

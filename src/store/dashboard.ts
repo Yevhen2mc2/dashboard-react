@@ -21,7 +21,7 @@ export const useDashboardStore = create<DashboardStore>()(
   persist(
     (set) => ({
       // Panel Mode
-      panelMode: 'classic',
+      panelMode: 'modular',
       setPanelMode: (mode: PanelMode) => set({ panelMode: mode }),
 
       // Global Filters

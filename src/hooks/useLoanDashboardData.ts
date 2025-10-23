@@ -28,8 +28,7 @@ import {
  * Main hook for managing all dashboard mock data with live updates
  *
  * Update Intervals:
- * - 3s: Live applications
- * - 5s: Overview cards
+ * - 3s: Live applications, Overview cards
  * - 10s: Issuance data, High-risk clients
  * - 15s: Interest rate data
  * - 30s: Loan type data, Portfolio yield
@@ -90,15 +89,11 @@ export function useLoanDashboardData(): DashboardData {
 
   // Setup update intervals
   useEffect(() => {
-    // 3s: Live applications
+    // 3s: Live applications, Overview cards
     const interval3s = setInterval(() => {
       setLiveApplications((current) => addLiveApplication(current, country));
-    }, 3000);
-
-    // 5s: Overview cards
-    const interval5s = setInterval(() => {
       setOverviewData((current) => updateOverviewData(current));
-    }, 5000);
+    }, 3000);
 
     // 10s: Issuance data, High-risk clients
     const interval10s = setInterval(() => {
@@ -128,7 +123,6 @@ export function useLoanDashboardData(): DashboardData {
     // Cleanup all intervals on unmount
     return () => {
       clearInterval(interval3s);
-      clearInterval(interval5s);
       clearInterval(interval10s);
       clearInterval(interval15s);
       clearInterval(interval30s);

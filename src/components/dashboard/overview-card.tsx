@@ -54,7 +54,7 @@ export function OverviewCard({
               {formattedValue}
             </h3>
           </div>
-          <Icon className="size-6 text-primary" />
+          <Icon className="size-6 text-foreground" />
         </div>
 
         <div className="flex items-center justify-between">

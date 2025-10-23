@@ -59,7 +59,7 @@ export function InterestRateChart({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[350px] w-full">
+        <ChartContainer config={chartConfig} className="h-[400px] w-full">
           <ComposedChart data={interestRateData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
