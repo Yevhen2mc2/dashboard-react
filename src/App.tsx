@@ -6,6 +6,7 @@ import { LoanIssuanceChart } from '@/components/dashboard/loan-issuance-chart.ts
 import { LoanTypeChart } from '@/components/dashboard/loan-type-chart.tsx';
 import { AgeDistributionChart } from '@/components/dashboard/age-distribution-chart.tsx';
 import { RegionTreemap } from '@/components/dashboard/region-treemap.tsx';
+import { InterestRateChart } from '@/components/dashboard/interest-rate-chart.tsx';
 import { RealTimeApplications } from '@/components/dashboard/real-time-applications.tsx';
 import { useLoanDashboardData } from '@/hooks';
 
@@ -28,6 +29,9 @@ function App() {
               />
             </div>
             <RegionTreemap regionData={dashboardData.regionData} />
+            <InterestRateChart
+              interestRateData={dashboardData.interestRateData}
+            />
             <RealTimeApplications
               liveApplications={dashboardData.liveApplications}
             />
