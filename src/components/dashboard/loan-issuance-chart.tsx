@@ -13,11 +13,11 @@ import type { IssuanceDataPoint } from '@/types/dashboard-data';
 const chartConfig = {
   newLoans: {
     label: 'New Loans',
-    color: 'hsl(var(--chart-1))',
+    color: 'var(--chart-1)',
   },
   loanAmount: {
     label: 'Loan Amount',
-    color: 'hsl(var(--chart-2))',
+    color: 'var(--chart-2)',
   },
 };
 
@@ -41,7 +41,7 @@ export function LoanIssuanceChart({ issuanceData }: LoanIssuanceChartProps) {
     <Card className="col-span-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <TrendingUp className="h-5 w-5" />
+          <TrendingUp className="size-5" />
           Loan Issuance Over Time
         </CardTitle>
       </CardHeader>
