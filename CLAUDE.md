@@ -108,3 +108,5 @@ The project uses React 19 with React Compiler enabled:
 3. **Real-time Updates**: Data updaters should maintain data shape and apply small incremental changes to simulate realistic live updates without full regeneration.
 
 4. **Component Conventions**: Dashboard components follow pattern: accept typed props, use Recharts ResponsiveContainer, include Card wrapper from shadcn/ui.
+
+5. **Shadcn MCP** use MCP server `.mcp.json` for manage shadcn 
